@@ -8,14 +8,24 @@ BEGIN
 END
 GO
 
--- FEATURE INTEGRATION POINT
--- The primary [account] table, which is central to the multi-tenancy architecture, will be defined here.
--- Example:
-/*
+/**
+ * @table {account} Represents a tenant in the multi-tenant architecture.
+ * @multitenancy false
+ * @softDelete false
+ * @alias acc
+ */
 CREATE TABLE [subscription].[account] (
-  [idAccount] INT IDENTITY(1,1) NOT NULL,
+  [idAccount] INT IDENTITY(1, 1) NOT NULL,
   [name] NVARCHAR(100) NOT NULL,
-  [isActive] BIT NOT NULL DEFAULT (1),
+  [active] BIT NOT NULL DEFAULT (1),
   [dateCreated] DATETIME2 NOT NULL DEFAULT (GETUTCDATE())
 );
-*/
+GO
+
+/**
+ * @primaryKey {pkAccount}
+ * @keyType Object
+ */
+ALTER TABLE [subscription].[account]
+ADD CONSTRAINT [pkAccount] PRIMARY KEY CLUSTERED ([idAccount]);
+GO

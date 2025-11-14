@@ -25,4 +25,9 @@ export const config = {
       allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
     },
   },
+  jwt: {
+    secret: process.env.JWT_SECRET || 'default_secret_key',
+    expiresIn: process.env.JWT_EXPIRES_IN || '2h',
+    rememberMeExpiresIn: process.env.JWT_REMEMBER_ME_EXPIRES_IN || '30d',
+  },
 };

@@ -1,9 +1,11 @@
 import { Router } from 'express';
+import { validationMiddleware } from '@/middleware/validationMiddleware';
+import * as loginController from '@/api/v1/external/security/login/controller';
+import { loginSchema } from '@/api/v1/external/security/login/validation';
 
 const router = Router();
 
-// FEATURE INTEGRATION POINT
-// Example: import authRoutes from '@/api/v1/external/auth/routes';
-// router.use('/auth', authRoutes);
+// Security routes
+router.post('/security/login', validationMiddleware(loginSchema), loginController.postHandler);
 
 export default router;
